@@ -11,7 +11,6 @@ class Board{
         int board_size; 
     public:
         Board();
-        void showBoard(); //Prints board
         char getBox(int); //Returns type of box (N, L or S)
         int getBoardSize(); //Returns board size
 };

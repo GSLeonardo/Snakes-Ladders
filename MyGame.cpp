@@ -8,7 +8,7 @@ using namespace std;
 
 MyGame::MyGame(){
     turn = 1; //The game starts at turn number 1
-    maxTurns = 10; //Limit of turns
+    maxTurns = 15; //Limit of turns
 }
 
 void MyGame::start(){
@@ -20,11 +20,12 @@ void MyGame::start(){
     char input; //Input char used to decide whether the game continues or not
     bool check = true; //True if the game continues
     int prevPos; //Previous position of the player, before rolling the dice
+    int bSize =  (b1.getBoardSize()-1);
     cout << "Press C to continue next turn, or E to end the game:" << endl;
 
     //While the input char is C and the maximum number of turns hasn't been reached
     //The game will continue 
-    while(check && turn < (maxTurns+1)){
+    while(check && turn < (maxTurns+1) && p1.getPosition() != bSize && p2.getPosition()!= bSize){
         d1.roll();
         if(turn % 2 == 0){
             prevPos = p2.getPosition();
@@ -43,16 +44,16 @@ void MyGame::start(){
     }
     cout << "-- GAME OVER --" << endl;
     //If player one reaches the last position, wins
-    if(p1.getPosition() == 30 && p2.getPosition() != 30){
+    if(p1.getPosition() == bSize && p2.getPosition() != bSize){
         cout << "Player 1 is the winner!!!";
     }
     //If player two reaches the last position, wins
-    else if(p1.getPosition() != 30 && p2.getPosition() == 30){
+    else if(p1.getPosition() != bSize && p2.getPosition() == bSize){
         cout << "Player 2 is the winner!!!";
     }
     //If the input char is E and nobody reached the last position
     //So nobody wins
-    else if(input == 'E' && p1.getPosition() != 30 && p2.getPosition() != 30){
+    else if(input == 'E' && p1.getPosition() != bSize && p2.getPosition() != bSize){
         cout << "Thanks for playing!!!";
     }
     else if(turn == (maxTurns+1)){
@@ -61,8 +62,8 @@ void MyGame::start(){
 }
 
 void MyGame::gameDetails(int prev, int dice, Player p, Board b){
-    cout << turn << " " << p.getNumber() << " " << prev << " "
-    << dice << " " << b.getBox(prev + dice) << " " << p.getPosition() << endl;
+    cout << turn << " " << p.getNumber() << " " << (prev+1) << " " << dice << " " 
+    << b.getBox(min(prev + dice, (b.getBoardSize()-1))) << " " << (p.getPosition()+1) << endl;
 } //Displays game detalis like this: "1 1 1 5 N 6"
 
 bool MyGame::continueGame(char input){

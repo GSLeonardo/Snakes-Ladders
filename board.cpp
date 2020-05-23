@@ -10,6 +10,7 @@ Board::Board(){
     //These vector contains the position of each ladder and snake on the board
     vector<int> snakes, ladders;
     int s, l;
+    board_size = 30;
     srand(time(NULL));
 
     //This cycle generates random positions for the snakes and ladders
@@ -53,18 +54,6 @@ Board::Board(){
 //Get box type of wanted position
 char Board::getBox(int pos){
     return board[pos];
-}
-
-//Prints the board on console
-void Board::showBoard(){
-    for(int i = 0; i < board.size(); i++){
-        if((i+1)%6 == 0){
-            cout << board[i] << endl;
-        }
-        else{
-            cout << board[i] << " ";
-        }
-    }
 }
 
 int Board::getBoardSize(){

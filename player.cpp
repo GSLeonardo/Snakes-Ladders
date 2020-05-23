@@ -7,7 +7,7 @@ using namespace std;
 //Creates a new player and places it at the begining of the board
 Player::Player(int number_){
     number = number_;
-    position = 1;
+    position = 0;
 }
 
 //Moves the player on the board
@@ -25,8 +25,8 @@ void Player::movePlayer(int dice_num, Board game){
 
     //In case the position exceeds the last position
     //The limit position is 30
-    if(position > 30){
-        position = 30;
+    if(position > 29){
+        position = 29;
     }
 }
 
